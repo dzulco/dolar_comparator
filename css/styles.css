@@ -1,0 +1,112 @@
+/* --- Reset y base --- */
+body {
+  font-family: system-ui, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+header {
+  text-align: center;
+  padding: 2rem 1rem;
+  background-color: #e1f5fe;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* --- Contenedor principal --- */
+.container {
+ 
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+}
+
+/* --- Tabla responsive --- */
+table {
+  border-collapse: collapse;
+  max-width: 750px;
+  width: 100%;
+  margin: 1rem auto;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+thead {
+  background-color: #f1f1f1;
+}
+
+th, td {
+  padding: 1rem;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+/* --- Colores para mejores valores --- */
+.mejor-compra {
+  background-color: #e0f7fa;
+  font-weight: bold;
+}
+
+.mejor-venta {
+  background-color: #ffe0b2;
+  font-weight: bold;
+}
+
+/* --- Referencias y hora --- */
+#referencias-row,
+#hora-row {
+  margin-top: 1rem;
+  font-weight: normal;
+  text-align: center;
+  word-wrap: break-word;
+}
+
+#referencia-dolarcripto{
+  margin-top: 1rem;
+  font-weight: lighter;
+  text-align: center;
+  word-wrap: break-word;
+  font-size: x-small;
+}
+
+/* --- Footer --- */
+footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  background-color: #f0f0f0;
+  margin-top: 2rem;
+  color: #666;
+}
+
+/* --- Scroll horizontal en móvil --- */
+@media (max-width: 600px) {
+  .container{
+    display: flex;
+  }
+  table {
+    display: block;
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  th, td {
+    white-space: nowrap;
+    padding: 0.75rem;
+  }
+
+  header h1 {
+    font-size: 1.4rem;
+  }
+
+  .container {
+    padding: 0.5rem;
+  }
+}

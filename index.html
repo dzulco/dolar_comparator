@@ -1,0 +1,74 @@
+<!DOCTYPE html >
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Comparador de cotizaciones del dolar en Argentina: oficial, MEP, blue y cripto. Actualizado en tiempo real." />
+  <meta name="keywords" content="dolar, blue, oficial, MEP, cripto, cotizacion, Argentina, comparador" />
+  <meta name="author" content="Comparador de Dólar" />
+  <title>Comparador de Dólar Argentina</title>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="./css/styles.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Comparador de Dolar",
+    "url": "https://tusitio.com",
+    "description": "Comparador actualizado del dolar oficial, MEP, blue y cripto en Argentina.",
+    "inLanguage": "es"
+  }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>🔁 Comparador de Cotizaciones del Dólar</h1>
+    <p>Actualizado en tiempo real – Oficial, MEP, Blue y Cripto</p>
+  </header>
+
+  <main class="container">
+    <section aria-label="Cotizaciones">
+      <table>
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th>Compra</th>
+            <th>Venta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span aria-hidden="true">🏛️</span> Oficial</td>
+            <td id="oficial-compra"></td>
+            <td id="oficial-venta"></td>
+          </tr>
+          <tr>
+            <td><span aria-hidden="true">📊</span> MEP</td>
+            <td id="mep-compra"></td>
+            <td id="mep-venta"></td>
+          </tr>
+          <tr>
+            <td><span aria-hidden="true">🌐</span> Cripto*</td>
+            <td id="buenbit-compra"></td>
+            <td id="buenbit-venta"></td>
+          </tr>
+          <tr>
+            <td><span aria-hidden="true">🧾</span> Blue</td>
+            <td id="blue-compra"></td>
+            <td id="blue-venta"></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <div id="referencias-row"></div>
+    <div id="hora-row"></div>
+    <div id="referencia-dolarcripto">* basado en cotización de DAI en Buenbit</div>
+      </main>
+
+  <footer>
+    <p>Fuentes: <a href="https://dolarapi.com/" target="_blank">dolarapi.com</a>, <a href="https://criptoya.com" target="_blank">criptoya.com</a></p>
+  </footer>
+
+  <script src="./js/script.js" defer></script>
+</body>
+</html>
