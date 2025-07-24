@@ -39,15 +39,15 @@ function resaltarMejoresValores() {
   const compras = [...document.querySelectorAll("td[id$='compra']")];
   const ventas = [...document.querySelectorAll("td[id$='venta']")];
 
-  let maxCompra = Math.max(...compras.map(td => parseFloat(td.textContent) || -Infinity));
-  let minVenta = Math.min(...ventas.map(td => parseFloat(td.textContent) || Infinity));
+  let maxCompra = Math.max(...compras.map(td => parseFloat(td.textContent.substring(1)) || -Infinity));
+  let minVenta = Math.min(...ventas.map(td => parseFloat(td.textContent.substring(1)) || Infinity));
 
   compras.forEach(td => {
-    if (parseFloat(td.textContent) === maxCompra) td.classList.add("mejor-compra");
+    if (parseFloat(td.textContent.substring(1)) === maxCompra) td.classList.add("mejor-compra");
   });
 
   ventas.forEach(td => {
-    if (parseFloat(td.textContent) === minVenta) td.classList.add("mejor-venta");
+    if (parseFloat(td.textContent.substring(1)) === minVenta) td.classList.add("mejor-venta");
   });
 }
 
@@ -55,12 +55,12 @@ function mostrarReferencias() {
   const compras = [...document.querySelectorAll("td[id$='compra']")];
   const ventas = [...document.querySelectorAll("td[id$='venta']")];
 
-  let maxCompra = Math.max(...compras.map(td => parseFloat(td.textContent) || -Infinity));
-  let minVenta = Math.min(...ventas.map(td => parseFloat(td.textContent) || Infinity));
+  let maxCompra = Math.max(...compras.map(td => parseFloat(td.textContent.substring(1)) || -Infinity));
+  let minVenta = Math.min(...ventas.map(td => parseFloat(td.textContent.substring(1)) || Infinity));
 
-  const mejorCompraTipo = compras.find(td => parseFloat(td.textContent) === maxCompra)
+  const mejorCompraTipo = compras.find(td => parseFloat(td.textContent.substring(1)) === maxCompra)
     .parentElement.firstElementChild.textContent;
-  const mejorVentaTipo = ventas.find(td => parseFloat(td.textContent) === minVenta)
+  const mejorVentaTipo = ventas.find(td => parseFloat(td.textContent.substring(1)) === minVenta)
     .parentElement.firstElementChild.textContent;
 
   document.getElementById('referencias-row').innerHTML =
@@ -79,17 +79,17 @@ async function cargarDatos() {
   const buenbit = await obtenerDolarCriptoYa();
   const blue = await obtenerDolarBlueCriptoYa();
 
-  document.getElementById("oficial-compra").textContent = oficial.compra;
-  document.getElementById("oficial-venta").textContent = oficial.venta;
+  document.getElementById("oficial-compra").textContent = '$' + oficial.compra;
+  document.getElementById("oficial-venta").textContent = '$' + oficial.venta;
 
-  document.getElementById("mep-compra").textContent = mep.compra;
-  document.getElementById("mep-venta").textContent = mep.venta;
+  document.getElementById("mep-compra").textContent = '$' + mep.compra;
+  document.getElementById("mep-venta").textContent = '$' + mep.venta;
 
-  document.getElementById("buenbit-compra").textContent = buenbit.compra;
-  document.getElementById("buenbit-venta").textContent = buenbit.venta;
+  document.getElementById("buenbit-compra").textContent = '$' + buenbit.compra;
+  document.getElementById("buenbit-venta").textContent = '$' + buenbit.venta;
 
-  document.getElementById("blue-compra").textContent = blue.compra;
-  document.getElementById("blue-venta").textContent = blue.venta;
+  document.getElementById("blue-compra").textContent = '$' + blue.compra;
+  document.getElementById("blue-venta").textContent = '$' + blue.venta;
 
   resaltarMejoresValores();
   mostrarReferencias();
@@ -97,3 +97,4 @@ async function cargarDatos() {
 }
 
 cargarDatos();
+
