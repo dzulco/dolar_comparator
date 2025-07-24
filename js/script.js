@@ -60,11 +60,13 @@ function mostrarReferencias() {
 
   const mejorCompraTipo = compras.find(td => parseFloat(td.textContent.substring(1)) === maxCompra)
     .parentElement.firstElementChild.textContent;
+
+    
   const mejorVentaTipo = ventas.find(td => parseFloat(td.textContent.substring(1)) === minVenta)
     .parentElement.firstElementChild.textContent;
 
   document.getElementById('referencias-row').innerHTML =
-    `✔️ Mejor compra: <strong>${mejorCompraTipo.trim()}</strong> | Venta más barata: <strong>${mejorVentaTipo.trim()}</strong>`;
+    `✔️ Mejor compra: <strong>${mejorCompraTipo.trim()+ ' $' + maxCompra}</strong> | Venta más barata: <strong>${mejorVentaTipo.trim()+ ' $' + minVenta}</strong>`;
 }
 
 function mostrarHoraActualizacion() {
