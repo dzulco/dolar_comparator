@@ -9,9 +9,21 @@ body {
 
 header {
   text-align: center;
+  position: relative;
   padding: 2rem 1rem;
   background-color: #e1f5fe;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+header h1 {
+  padding-top: 28px;
+  font-size: 2.3rem;
+  margin: 0;
+}
+
+
+:link{
+  text-decoration: none;
 }
 
 /* --- Contenedor principal --- */
@@ -86,6 +98,29 @@ footer {
   color: #666;
 }
 
+#weather-info {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 0.75rem;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: transparent;
+  padding: 2px 6px;
+}
+
+#weather-icon {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  filter: none;
+  box-shadow: none;
+}
+
+
+
 /* --- Scroll horizontal en móvil --- */
 @media (max-width: 600px) {
   .container{
@@ -101,12 +136,21 @@ footer {
     white-space: nowrap;
     padding: 0.75rem;
   }
-
-  header h1 {
+header h1 {
     font-size: 1.4rem;
+    padding-top: 36px;
   }
 
+  #weather-info {
+    display: none;
+  }
+
+  #weather-icon {
+    display: none;
+  }
   .container {
     padding: 0.5rem;
   }
+
+
 }

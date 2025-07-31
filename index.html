@@ -11,7 +11,7 @@
   <meta name="description" content="Compará en tiempo real las cotizaciones del dólar oficial, blue, MEP y cripto en Argentina. Actualizado cada 10 minutos con las mejores fuentes." />
   
   <!-- Keywords relevantes -->
-  <meta name="keywords" content="dólar, dólar blue, dólar oficial, dólar mep, dólar cripto, cotización dólar Argentina, comparador dólar" />
+  <meta name="keywords" content="dolar, dolar blue, dolar oficial, dolar mep, dolar cripto, cotizacion dolar Argentina, comparador dolar" />
   
   <meta name="author" content="Comparador de Dólar" />
   <meta name="google-site-verification" content="gTdNC5KeKlqdVCYUnaBBWW80JpZTF_KPJ-7-klinCkk" />
@@ -62,9 +62,13 @@
 </head>
 <body>
   <header>
-    <!-- Mejor separar el emoji para accesibilidad -->
-    <h1><span aria-hidden="true">🔁</span> Dólar Comparador</h1>
+    <h1><span aria-hidden="true"><a href="./index.html">🔁</span> Dólar Comparador</a></h1>
     <p>Compará cotizaciones del dólar en Argentina en tiempo real</p>
+    <p>La forma mas rápida de encontrar la cotización para vender o comprar</p>
+    <div id="weather-info" class="weather-info d-flex align-items-center gap-2">
+      <img id="weather-icon" src="" alt="Clima" width="32" height="32" style="display: none;" />
+      <span id="weather-text">Cargando clima...</span>
+    </div>
   </header>
 
   <main class="container">
@@ -111,7 +115,7 @@
     <h2 class="h3 text-center mb-3">Comparador de Cotizaciones del Dólar en Argentina</h2>
     <p class="text-center">
       Este sitio te permite comparar en tiempo real las diferentes cotizaciones del dólar en Argentina:
-      <strong>Oficial, Blue, MEP, CCL, Cripto</strong> y más. Ideal para saber <strong>dónde conviene comprar o vender</strong> según el tipo de cambio.
+      <strong>Oficial, Blue, MEP, Cripto</strong> y más. Ideal para saber <strong>dónde conviene comprar o vender</strong> según el tipo de cambio.
     </p>
 
     <h3 class="h5 mt-4">¿Qué tipo de dólar me conviene?</h3>
@@ -119,13 +123,13 @@
       <li><strong>Dólar Oficial:</strong> es el valor publicado por el Banco Nación.</li>
       <li><strong>Dólar Blue:</strong> es el valor del mercado informal.</li>
       <li><strong>Dólar MEP:</strong> se obtiene a través de operaciones bursátiles legales (Mercado Electrónico de Pagos).</li>
-      <li><strong>Dólar Cripto:</strong> se obtiene usando cripto DAI.</li>
+      <li><strong>Dólar Cripto:</strong> se obtiene usando como intermediario la cripto DAI. Para vender: Dolar -> DAI -> Pesos ¦ Para comprar: Pesos -> DAI -> Dolar</li>
     </ul>
 
     <h3 class="h5 mt-4">Fuente de los datos</h3>
     <p>
       Los valores se obtienen automáticamente desde <a href="https://dolarapi.com" target="_blank" rel="noopener noreferrer">DolarAPI</a> y
-      <a href="https://criptoya.com" target="_blank" rel="noopener noreferrer">CriptoYa</a>. El sitio se actualiza cada 10 minutos para mostrar los precios más recientes.
+      <a href="https://criptoya.com" target="_blank" rel="noopener noreferrer">CriptoYa</a>. El sitio se actualiza cada vez que se carga para mostrar los precios más recientes.
     </p>
 
     <h3 class="h5 mt-4">¿Cómo interpretar la tabla?</h3>
