@@ -117,7 +117,8 @@ async function cargarClimaBuenosAires() {
     const opcionesFecha = { weekday: 'long', day: 'numeric', month: 'short' };
     const fechaTexto = fecha.toLocaleDateString('es-AR', opcionesFecha);
 
-    document.getElementById("weather-icon").src = `https://openweathermap.org/img/wn/${icon}@2x.png`;
+    const iconElement = document.getElementById("weather-icon");
+    iconElement.className = `owi owi-${icon}`;
     document.getElementById("weather-icon").style.display = 'inline-block';
 
     document.getElementById("weather-text").textContent =

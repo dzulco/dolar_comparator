@@ -34,7 +34,8 @@
   
   <!-- CSS -->
   <link rel="stylesheet" href="./css/styles.css" />
-  
+  <link rel="stylesheet" href="./css/open-weather-icons.css">
+
   <!-- JSON-LD Schema más completo -->
   <script type="application/ld+json">
   {
@@ -65,13 +66,15 @@
     <h1><span aria-hidden="true"><a href="./index.html">🔁</span> Dólar Comparador</a></h1>
     <p>Compará cotizaciones del dólar en Argentina en tiempo real</p>
     <p>La forma mas rápida de encontrar la cotización para vender o comprar</p>
-    <div id="weather-info" class="weather-info d-flex align-items-center gap-2">
-      <img id="weather-icon" src="" alt="Clima" width="32" height="32" style="display: none;" />
-      <span id="weather-text">Cargando clima...</span>
-    </div>
+   
   </header>
 
   <main class="container">
+     <div id="weather-info" class="weather-info d-flex align-items-center gap-2">
+      <!--<img id="weather-icon" src="" alt="Clima" width="32" height="32" style="display: none;" />-->
+      <i id="weather-icon" class="owi" style="display:none;"></i>
+      <span id="weather-text">Cargando clima...</span>
+    </div>
     <section aria-label="Cotizaciones del dólar">
       <table>
         <thead>
