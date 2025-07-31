@@ -99,39 +99,3 @@ async function cargarDatos() {
 }
 
 cargarDatos();
-
-async function cargarClimaBuenosAires() {
-  const apiKey = 'xxx';
-  const ciudad = 'Buenos%20Aires';
-  const pais = 'AR';
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${ciudad},${pais}&units=metric&lang=es&appid=${apiKey}`;
-
-  try {
-    const res = await fetch(url);
-    const data = await res.json();
-
-    const temp = Math.round(data.main.temp);
-    const icon = data.weather[0].icon;
-
-    const fecha = new Date();
-    const opcionesFecha = { weekday: 'long', day: 'numeric', month: 'short' };
-    const fechaTexto = fecha.toLocaleDateString('es-AR', opcionesFecha);
-
-    const iconElement = document.getElementById("weather-icon");
-    iconElement.className = `owi owi-${icon}`;
-    document.getElementById("weather-icon").style.display = 'inline-block';
-
-    document.getElementById("weather-text").textContent =
-      `${temp}° ${capitalizar(fechaTexto)}, Buenos Aires, Argentina`;
-  } catch (error) {
-    document.getElementById("weather-text").textContent = "No se pudo cargar el clima";
-    document.getElementById("weather-icon").style.display = 'none';
-    console.error(error);
-  }
-}
-
-function capitalizar(texto) {
-  return texto.charAt(0).toUpperCase() + texto.slice(1);
-}
-
-cargarClimaBuenosAires();
