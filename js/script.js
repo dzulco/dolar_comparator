@@ -101,7 +101,7 @@ async function cargarDatos() {
 cargarDatos();
 
 async function cargarClimaBuenosAires() {
-  const apiKey = '050566e147ef9899930ec25587c64233';
+  const apiKey = 'xxx';
   const ciudad = 'Buenos%20Aires';
   const pais = 'AR';
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${ciudad},${pais}&units=metric&lang=es&appid=${apiKey}`;
