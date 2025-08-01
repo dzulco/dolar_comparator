@@ -1,3 +1,8 @@
+document.addEventListener("DOMContentLoaded", () => {
+  cargarDatos();
+  cargarCarruselNoticias();
+});
+
 async function obtenerDolarApi(tipo) {
   try {
     const res = await fetch(`https://dolarapi.com/v1/dolares/${tipo}`);
@@ -35,6 +40,29 @@ async function obtenerDolarBlueCriptoYa() {
   }
 }
 
+async function cargarDatos() {
+  const oficial = await obtenerDolarApi("oficial");
+  const mep = await obtenerDolarApi("bolsa");
+  const buenbit = await obtenerDolarCriptoYa();
+  const blue = await obtenerDolarBlueCriptoYa();
+
+  document.getElementById("oficial-compra").textContent = '$' + oficial.compra;
+  document.getElementById("oficial-venta").textContent = '$' + oficial.venta;
+
+  document.getElementById("mep-compra").textContent = '$' + mep.compra;
+  document.getElementById("mep-venta").textContent = '$' + mep.venta;
+
+  document.getElementById("buenbit-compra").textContent = '$' + buenbit.compra;
+  document.getElementById("buenbit-venta").textContent = '$' + buenbit.venta;
+
+  document.getElementById("blue-compra").textContent = '$' + blue.compra;
+  document.getElementById("blue-venta").textContent = '$' + blue.venta;
+
+  resaltarMejoresValores();
+  mostrarReferencias();
+  mostrarHoraActualizacion();
+}
+
 function resaltarMejoresValores() {
   const compras = [...document.querySelectorAll("td[id$='compra']")];
   const ventas = [...document.querySelectorAll("td[id$='venta']")];
@@ -61,12 +89,11 @@ function mostrarReferencias() {
   const mejorCompraTipo = compras.find(td => parseFloat(td.textContent.substring(1)) === maxCompra)
     .parentElement.firstElementChild.textContent;
 
-    
   const mejorVentaTipo = ventas.find(td => parseFloat(td.textContent.substring(1)) === minVenta)
     .parentElement.firstElementChild.textContent;
 
   document.getElementById('referencias-row').innerHTML =
-    `✔️ Mejor compra: <strong>${mejorCompraTipo.trim()+ ' $' + maxCompra}</strong> | Venta más barata: <strong>${mejorVentaTipo.trim()+ ' $' + minVenta}</strong>`;
+    `✔️ Mejor compra: <strong>${mejorCompraTipo.trim()} $${maxCompra}</strong> | Venta más barata: <strong>${mejorVentaTipo.trim()} $${minVenta}</strong>`;
 }
 
 function mostrarHoraActualizacion() {
@@ -75,27 +102,43 @@ function mostrarHoraActualizacion() {
   document.getElementById('hora-row').textContent = `⏱ Última actualización: ${hora}`;
 }
 
-async function cargarDatos() {
-  const oficial = await obtenerDolarApi("oficial");
-  const mep = await obtenerDolarApi("bolsa");
-  const buenbit = await obtenerDolarCriptoYa();
-  const blue = await obtenerDolarBlueCriptoYa();
+async function cargarCarruselNoticias() {
+  try {
+    const res = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.ambito.com/rss/economia.xml');
+    const data = await res.json();
 
-  document.getElementById("oficial-compra").textContent = '$' + oficial.compra;
-  document.getElementById("oficial-venta").textContent = '$' + oficial.venta;
+    const contenedor = document.getElementById("noticiasCarousel");
+    if (!data.items || !Array.isArray(data.items)) return;
 
-  document.getElementById("mep-compra").textContent = '$' + mep.compra;
-  document.getElementById("mep-venta").textContent = '$' + mep.venta;
+    // Limpiamos el contenido previo si hubiera
+    contenedor.innerHTML = '';
 
-  document.getElementById("buenbit-compra").textContent = '$' + buenbit.compra;
-  document.getElementById("buenbit-venta").textContent = '$' + buenbit.venta;
+    data.items.slice(0, 5).forEach((noticia, i) => {
+      const item = document.createElement("div");
+      item.className = "carousel-item" + (i === 0 ? " active" : "");
+      item.innerHTML = `
+        <div class="d-block w-100 p-3 bg-light rounded">
+          <a href="${noticia.link}" target="_blank" class="h6 d-block text-decoration-none mb-1" rel="noopener noreferrer">
+            🗞️ ${noticia.title}
+          </a>
+          <small class="text-muted">${new Date(noticia.pubDate).toLocaleDateString()}</small>
+        </div>
+      `;
+      contenedor.appendChild(item);
+    });
 
-  document.getElementById("blue-compra").textContent = '$' + blue.compra;
-  document.getElementById("blue-venta").textContent = '$' + blue.venta;
+    // Inicializar o reiniciar el carrusel para que empiece a rotar
+    const carruselElement = document.querySelector('#carruselNoticias');
+    const carousel = bootstrap.Carousel.getInstance(carruselElement) || new bootstrap.Carousel(carruselElement, {
+      interval: 4000, // gira cada 4 segundos
+      ride: 'carousel'
+    });
 
-  resaltarMejoresValores();
-  mostrarReferencias();
-  mostrarHoraActualizacion();
+  } catch (error) {
+    console.error("Error al cargar noticias:", error);
+  }
 }
 
-cargarDatos();
+document.addEventListener("DOMContentLoaded", () => {
+  cargarCarruselNoticias();
+});

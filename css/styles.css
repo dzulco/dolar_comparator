@@ -98,6 +98,55 @@ footer {
   margin-top: 2rem;
   color: #666;
 }
+.carousel-item {
+  min-height: 150px;
+  transition: transform 0.6s ease;
+}
+
+.carousel-item > div {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.carousel-item a.h6 {
+  font-size: 1.05rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #0d6efd; /* bootstrap primary */
+}
+
+.carousel-item a.h6:hover {
+  text-decoration: underline;
+}
+.carousel-control-prev-icon {
+  background-image: url('data:image/svg+xml;utf8,<svg fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8"><path d="M5.5 0L1 4l4.5 4V0z"/></svg>');
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 36px;
+  height: 36px;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.carousel-control-next-icon {
+  background-image: url('data:image/svg+xml;utf8,<svg fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8"><path d="M2.5 0L7 4 2.5 8V0z"/></svg>');
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 36px;
+  height: 36px;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.carousel-control-prev-icon:hover,
+.carousel-control-next-icon:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+}
 
 /* --- Scroll horizontal en móvil --- */
 @media (max-width: 600px) {
@@ -122,6 +171,29 @@ header h1 {
   .container {
     padding: 0.5rem;
   }
+.carousel-item {
+    min-height: auto; /* elimina altura fija */
+    padding: 0.5rem 1rem; /* menos padding para móviles */
+  }
 
+  .carousel-item > div {
+    font-size: 0.9rem; /* texto un poco más chico */
+  }
 
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    width: 28px;
+    height: 28px;
+    background-size: 18px 18px;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  .carousel-control-prev-icon:hover,
+  .carousel-control-next-icon:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+.carousel-item a.h6 {
+    font-size: .6rem;
+}
 }

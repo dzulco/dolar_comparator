@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Noticias Económicas | Dólar Comparador</title>
+  <meta name="description" content="Listado completo de noticias económicas recientes desde Ámbito para mantenerte informado." />
+  <link rel="stylesheet" href="./css/styles.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+  <header class="container py-3">
+    <h1>Dólar Comparador - Noticias Económicas</h1>
+    <p><a href="./index.html" class="btn btn-primary btn-sm">← Volver al inicio</a></p>
+  </header>
+
+  <main class="container my-4">
+    <section>
+      <h2 class="mb-4">Últimas Noticias de Economía desde Ámbito</h2>
+      <div id="listaNoticias" class="list-group">
+        <!-- Noticias cargadas dinámicamente -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="container mt-5 mb-3 text-muted text-center small">
+    <p>Fuente: <a href="https://www.ambito.com/" target="_blank" rel="noopener noreferrer">Ámbito</a></p>
+    <p>&copy; 2025 Dólar Comparador</p>
+  </footer>
+
+  <script>
+    async function cargarNoticias() {
+      try {
+        const res = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.ambito.com/rss/economia.xml');
+        const data = await res.json();
+
+        const lista = document.getElementById('listaNoticias');
+        lista.innerHTML = '';
+
+        if (!data.items || !Array.isArray(data.items)) {
+          lista.innerHTML = '<p>No se encontraron noticias.</p>';
+          return;
+        }
+
+        data.items.forEach(noticia => {
+          const item = document.createElement('a');
+          item.href = noticia.link;
+          item.target = "_blank";
+          item.rel = "noopener noreferrer";
+          item.className = 'list-group-item list-group-item-action flex-column align-items-start';
+          item.innerHTML = `
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">${noticia.title}</h5>
+              <small>${new Date(noticia.pubDate).toLocaleDateString()}</small>
+            </div>
+            <p class="mb-1 text-truncate">${noticia.description.replace(/<\/?[^>]+(>|$)/g, "").substring(0, 150)}...</p>
+          `;
+          lista.appendChild(item);
+        });
+      } catch (error) {
+        document.getElementById('listaNoticias').innerHTML = '<p>Error cargando las noticias.</p>';
+        console.error('Error al cargar noticias:', error);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', cargarNoticias);
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
