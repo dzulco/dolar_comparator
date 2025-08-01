@@ -142,3 +142,19 @@ async function cargarCarruselNoticias() {
 document.addEventListener("DOMContentLoaded", () => {
   cargarCarruselNoticias();
 });
+
+async function cargarClima() {
+    const climaDiv = document.getElementById('climaInfo');
+    try {
+      const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=-34.61&longitude=-58.38&current_weather=true');
+      const data = await res.json();
+      const c = data.current_weather;
+
+      climaDiv.textContent = `Buenos Aires, Argentina: ${c.temperature}°C | 💨 ${c.windspeed} km/h`;
+    } catch (err) {
+      climaDiv.textContent = 'Buenos Aires, Argentina: clima no disponible';
+      console.error(err);
+    }
+  }
+
+  cargarClima();

@@ -146,6 +146,12 @@ footer {
 .carousel-control-next-icon:hover {
   background-color: rgba(0, 0, 0, 0.6);
 }
+
+#climaInfo {
+ background-color: cyan !important;
+  padding: 0.25rem 0.6rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
 }
 
 /* --- Scroll horizontal en móvil --- */
@@ -195,5 +201,9 @@ header h1 {
   
 .carousel-item a.h6 {
     font-size: .6rem;
+}
+
+#climaInfo{
+  visibility: hidden;
 }
 }
