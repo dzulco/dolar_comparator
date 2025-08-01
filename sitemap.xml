@@ -16,4 +16,8 @@
     <loc>https://dolarcomparador.com.ar/privacidad.html</loc>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://dolarcomparador.com.ar/noticias.html</loc>
+    <priority>0.8</priority>
+  </url>
 </urlset>
