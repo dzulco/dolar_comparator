@@ -161,6 +161,16 @@ footer {
   .container{
     display: flex;
   }
+
+  #newsList_container{
+    display:flow-root;
+    text-align: center;
+  }
+  
+  #listaNoticias{
+    text-align: left;
+  }
+
   table {
     display: block;
     overflow-x: auto;
@@ -171,7 +181,7 @@ footer {
     white-space: nowrap;
     padding: 0.75rem;
   }
-header h1 {
+  header h1 {
     font-size: 1.4rem;
     padding-top: 36px;
   }
@@ -179,7 +189,7 @@ header h1 {
   .container {
     padding: 0.5rem;
   }
-.carousel-item {
+  .carousel-item {
     min-height: auto; /* elimina altura fija */
     padding: 0.5rem 1rem; /* menos padding para móviles */
   }
@@ -201,11 +211,11 @@ header h1 {
     background-color: rgba(0, 0, 0, 0.5);
   }
   
-.carousel-item a.h6 {
-    font-size: .6rem;
-}
+  .carousel-item a.h6 {
+      font-size: .6rem;
+  }
 
-#climaInfo{
-  visibility: hidden;
-}
+  #climaInfo{
+    visibility: hidden;
+  }
 }

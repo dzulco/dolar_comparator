@@ -77,7 +77,7 @@
 
   <main class="container">
      
-    <section aria-label="Cotizaciones del dólar">
+    <section id="tabla-cotizaciones" aria-label="Cotizaciones del dólar">
       <table>
         <thead>
           <tr>
@@ -114,15 +114,21 @@
     <div id="referencias-row"></div>
     <div id="hora-row"></div>
     <div id="referencia-dolarcripto">* basado en cotización de DAI en Buenbit</div>
+    <noscript>
+       <div class="alert alert-warning">
+          Esta página requiere JavaScript para mostrar las cotizaciones en tiempo real. Si no ves los valores, activá JavaScript en tu navegador.
+      </div>
+    </noscript>
   </main>
 
-<section class="container my-4">
+<section class="container my-4" id="noticias">
   <h2 class="h4 mb-3">📰 Noticias económicas recientes</h2>
 
   <div id="carruselNoticias" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner" id="noticiasCarousel">
-      <!-- Noticias dinámicas se insertarán acá -->
+      <!-- Las noticias del feed se agregarán después con JS -->
     </div>
+
     <button class="carousel-control-prev" type="button" data-bs-target="#carruselNoticias" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Anterior</span>
@@ -137,6 +143,7 @@
     <a href="noticias.html" class="btn btn-sm btn-outline-primary">Ver todas las noticias</a>
   </div>
 </section>
+
 
   <section class="container my-4">
     <h2 class="h3 text-center mb-3">Comparador de Cotizaciones del Dólar en Argentina</h2>
