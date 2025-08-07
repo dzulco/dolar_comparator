@@ -152,6 +152,15 @@ footer {
   background-color: rgba(0, 0, 0, 0.6);
 }
 
+.carrusel-img {
+  height: 250px;
+  object-fit: cover;
+  width: 100%;
+  display: block;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
 #climaInfo {
  background-color: cyan !important;
   padding: 0.25rem 0.6rem;
@@ -161,17 +170,29 @@ footer {
 
 /* --- Scroll horizontal en móvil --- */
 @media (max-width: 600px) {
-  .container{
-    display: flex;
+  .carrusel-img {
+    height: 250px;
   }
 
-  #newsList_container{
-    display:flow-root;
-    text-align: center;
+  .carousel-caption {
+    font-size: 0.85rem;
+    padding: 0.5rem 0.75rem;
+    background-color: rgba(0, 0, 0, 0.6); /* Más contraste en mobile */
   }
-  
-  #listaNoticias{
-    text-align: left;
+
+  .carousel-caption a.h6 {
+    font-size: 0.95rem;
+    color: white;
+    white-space: normal;
+    display: block;
+    width: 100%;
+  }
+
+  .carousel-caption a.h6:hover {
+    text-decoration: underline;
+  }
+  .container{
+    display: flex;
   }
 
   table {
@@ -194,44 +215,7 @@ footer {
     padding: 0.5rem;
   }
 
-  .carousel-inner {
-    overflow-x: hidden;
-    max-width: 100%;
-  }
-
-  .carousel-item {
-    min-height: auto; /* elimina altura fija */
-    padding: 0.5rem 1rem; /* menos padding para móviles */
-    box-sizing: border-box;
-    width: 100%;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-  }
-
-  .carousel-item > div {
-    font-size: 0.9rem; /* texto un poco más chico */
-  }
-
-
-
-  .carousel-control-prev-icon,
-  .carousel-control-next-icon {
-    width: 28px;
-    height: 28px;
-    background-size: 18px 18px;
-    background-color: rgba(0, 0, 0, 0.3);
-  }
-
-  .carousel-control-prev-icon:hover,
-  .carousel-control-next-icon:hover {
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-  
-.carousel-item a.h6 {
-  display: block;
-  white-space: normal; /* cambia de nowrap a normal */
-  word-break: break-word;
-}
+ 
 
   #climaInfo{
     visibility: hidden;

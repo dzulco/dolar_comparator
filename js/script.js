@@ -110,27 +110,28 @@ async function cargarCarruselNoticias() {
     const contenedor = document.getElementById("noticiasCarousel");
     if (!data.items || !Array.isArray(data.items)) return;
 
-    // Limpiamos el contenido previo si hubiera
-    contenedor.innerHTML = '';
+    contenedor.innerHTML = ''; // Limpiar contenido previo
 
     data.items.slice(0, 5).forEach((noticia, i) => {
+      const imagen = noticia.enclosure?.link || 'https://via.placeholder.com/800x400?text=Sin+imagen';
+
       const item = document.createElement("div");
       item.className = "carousel-item" + (i === 0 ? " active" : "");
       item.innerHTML = `
-        <div class="d-block w-100 p-3 bg-light rounded">
-          <a href="${noticia.link}" target="_blank" class="h6 d-block text-decoration-none mb-1" rel="noopener noreferrer">
+        <img src="${imagen}" class="carrusel-img" alt="Imagen de la noticia">
+        <div class="carousel-caption bg-dark bg-opacity-75 rounded-bottom p-3">
+          <a href="${noticia.link}" target="_blank" class="h6 d-block text-white text-decoration-none mb-1" rel="noopener noreferrer">
             🗞️ ${noticia.title}
           </a>
-          <small class="text-muted">${new Date(noticia.pubDate).toLocaleDateString()}</small>
+          <small class="text-light">${new Date(noticia.pubDate).toLocaleDateString()}</small>
         </div>
       `;
       contenedor.appendChild(item);
     });
 
-    // Inicializar o reiniciar el carrusel para que empiece a rotar
     const carruselElement = document.querySelector('#carruselNoticias');
-    const carousel = bootstrap.Carousel.getInstance(carruselElement) || new bootstrap.Carousel(carruselElement, {
-      interval: 4000, // gira cada 4 segundos
+    bootstrap.Carousel.getInstance(carruselElement) || new bootstrap.Carousel(carruselElement, {
+      interval: 4000,
       ride: 'carousel'
     });
 
@@ -138,6 +139,7 @@ async function cargarCarruselNoticias() {
     console.error("Error al cargar noticias:", error);
   }
 }
+
 
 document.addEventListener("DOMContentLoaded", () => {
   cargarCarruselNoticias();
