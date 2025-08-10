@@ -1,6 +1,6 @@
 async function cargarNoticias() {
   try {
-    const res = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.ambito.com/rss/economia.xml');
+    const res = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.clarin.com/rss/economia');
 
     if (!res.ok) throw new Error(`HTTP error: ${res.status}`);
 
