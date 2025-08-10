@@ -93,7 +93,7 @@ function mostrarReferencias() {
     .parentElement.firstElementChild.textContent;
 
   document.getElementById('referencias-row').innerHTML =
-    `✔️ Mejor compra: <strong>${mejorCompraTipo.trim()} $${maxCompra}</strong> | Venta más barata: <strong>${mejorVentaTipo.trim()} $${minVenta}</strong>`;
+    `✔️ Mejor precio para vender: <strong>${mejorCompraTipo.trim()} $${maxCompra}</strong> | Menor precio para comprar: <strong>${mejorVentaTipo.trim()} $${minVenta}</strong>`;
 }
 
 function mostrarHoraActualizacion() {
@@ -104,7 +104,7 @@ function mostrarHoraActualizacion() {
 
 async function cargarCarruselNoticias() {
   try {
-    const res = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.ambito.com/rss/economia.xml');
+    const res = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.clarin.com/rss/economia');
     const data = await res.json();
 
     const contenedor = document.getElementById("noticiasCarousel");
@@ -113,7 +113,7 @@ async function cargarCarruselNoticias() {
     contenedor.innerHTML = ''; // Limpiar contenido previo
 
     data.items.slice(0, 5).forEach((noticia, i) => {
-      const imagen = noticia.enclosure?.link || 'https://via.placeholder.com/800x400?text=Sin+imagen';
+      const imagen = noticia.enclosure?.link || 'https://placehold.co/800x400?text=-';
 
       const item = document.createElement("div");
       item.className = "carousel-item" + (i === 0 ? " active" : "");
