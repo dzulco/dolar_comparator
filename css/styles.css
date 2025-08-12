@@ -168,6 +168,19 @@ footer {
   font-weight: 500;
 }
 
+#cafecito {
+  position: fixed;
+  bottom: 20px;   /* distancia desde abajo */
+  right: 20px;    /* distancia desde la derecha */
+  z-index: 1000;  /* asegura que quede encima */
+}
+
+#cafecito img {
+  max-width: 180px; /* opcional para controlar el tamaño */
+  height: auto;
+}
+
+
 /* --- Scroll horizontal en móvil --- */
 @media (max-width: 600px) {
   .carrusel-img {
@@ -221,5 +234,14 @@ footer {
 
   #newsList_container{
     display: flow-root;
+  }
+
+  #cafecito {
+    bottom: 10px;
+    right: 10px;
+  }
+
+  #cafecito img {
+    max-width: 120px;
   }
 }

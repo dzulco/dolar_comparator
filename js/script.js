@@ -33,7 +33,8 @@ async function obtenerDolarBlueCriptoYa() {
     const data = await res.json();
     return {
       compra: data.blue.bid.toFixed(2),
-      venta: data.blue.ask.toFixed(2)
+      venta: data.blue.ask.toFixed(2),
+      variacion: data.blue.variation
     };
   } catch {
     return { compra: "N/D", venta: "N/D" };
@@ -41,6 +42,13 @@ async function obtenerDolarBlueCriptoYa() {
 }
 
 async function cargarDatos() {
+  await cargarCotizaciones();
+  resaltarMejoresValores();
+  mostrarReferencias();
+  mostrarHoraActualizacion();
+}
+
+async function cargarCotizaciones() {
   const oficial = await obtenerDolarApi("oficial");
   const mep = await obtenerDolarApi("bolsa");
   const buenbit = await obtenerDolarCriptoYa();
@@ -57,10 +65,6 @@ async function cargarDatos() {
 
   document.getElementById("blue-compra").textContent = '$' + blue.compra;
   document.getElementById("blue-venta").textContent = '$' + blue.venta;
-
-  resaltarMejoresValores();
-  mostrarReferencias();
-  mostrarHoraActualizacion();
 }
 
 function resaltarMejoresValores() {
