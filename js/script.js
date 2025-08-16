@@ -21,6 +21,7 @@ async function obtenerDolarCriptoYa() {
     const usd = await usdRes.json();
     const compra = (ars.bid / usd.ask).toFixed(2);
     const venta = (ars.ask / usd.bid).toFixed(2);
+    const variacion = usd.variation;
     return { compra, venta };
   } catch {
     return { compra: "N/D", venta: "N/D" };
@@ -34,7 +35,10 @@ async function obtenerDolarBlueCriptoYa() {
     return {
       compra: data.blue.bid.toFixed(2),
       venta: data.blue.ask.toFixed(2),
-      variacion: data.blue.variation
+      variacionBlue: data.blue.variation,
+      variacionMep: data.mep.al30.ci.variation,
+      variacionBuenBit: data.cripto.usdt.variation,
+      variacionOficial: data.oficial.variation
     };
   } catch {
     return { compra: "N/D", venta: "N/D" };
@@ -48,24 +52,52 @@ async function cargarDatos() {
   mostrarHoraActualizacion();
 }
 
+const COMISION_MEP = 0.01; // 1% de comisión
+
+function formatearVariacionHTML(valor) {
+  if (valor == null || isNaN(valor)) return '<div class="variacion">&nbsp;</div>';
+  const num = parseFloat(valor).toFixed(2);
+  if (num > 0) {
+    return `<div class="variacion">▲ ${num}%</div>`;
+  } else if (num < 0) {
+    return `<div class="variacion">▼ ${num}%</div>`;
+  } else {
+    return `<div class="variacion">= ${num}%</div>`;
+  }
+}
+
 async function cargarCotizaciones() {
   const oficial = await obtenerDolarApi("oficial");
   const mep = await obtenerDolarApi("bolsa");
   const buenbit = await obtenerDolarCriptoYa();
   const blue = await obtenerDolarBlueCriptoYa();
 
-  document.getElementById("oficial-compra").textContent = '$' + oficial.compra;
-  document.getElementById("oficial-venta").textContent = '$' + oficial.venta;
+  // Calcular precios MEP con comisión
+  const mepCompraComision = (parseFloat(mep.compra) * (1 - COMISION_MEP)).toFixed(2);
+  const mepVentaComision = (parseFloat(mep.venta) * (1 + COMISION_MEP)).toFixed(2);
 
-  document.getElementById("mep-compra").textContent = '$' + mep.compra;
-  document.getElementById("mep-venta").textContent = '$' + mep.venta;
+  document.getElementById("oficial-compra").innerHTML =
+    `<div class="celda-precio">$${oficial.compra}<div class="variacion">&nbsp;</div></div>`;
+  document.getElementById("oficial-venta").innerHTML =
+    `<div class="celda-precio">$${oficial.venta}${formatearVariacionHTML(blue.variacionOficial)}</div>`;
 
-  document.getElementById("buenbit-compra").textContent = '$' + buenbit.compra;
-  document.getElementById("buenbit-venta").textContent = '$' + buenbit.venta;
+  document.getElementById("mep-compra").innerHTML =
+    `<div class="celda-precio">$${mepCompraComision}<div class="variacion"></div></div>`;
+  document.getElementById("mep-venta").innerHTML =
+    `<div class="celda-precio">$${mepVentaComision}${formatearVariacionHTML(blue.variacionMep)}</div>`;
 
-  document.getElementById("blue-compra").textContent = '$' + blue.compra;
-  document.getElementById("blue-venta").textContent = '$' + blue.venta;
+  document.getElementById("buenbit-compra").innerHTML =
+    `<div class="celda-precio">$${buenbit.compra}<div class="variacion">&nbsp;</div></div>`;
+  document.getElementById("buenbit-venta").innerHTML =
+    `<div class="celda-precio">$${buenbit.venta}${formatearVariacionHTML(blue.variacionBuenBit)}</div>`;
+
+  document.getElementById("blue-compra").innerHTML =
+    `<div class="celda-precio">$${blue.compra}<div class="variacion">&nbsp;</div></div>`;
+  document.getElementById("blue-venta").innerHTML =
+    `<div class="celda-precio">$${blue.venta}${formatearVariacionHTML(blue.variacionBlue)}</div>`;
 }
+
+
 
 function resaltarMejoresValores() {
   const compras = [...document.querySelectorAll("td[id$='compra']")];
