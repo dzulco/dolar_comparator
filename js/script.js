@@ -196,3 +196,7 @@ async function cargarClima() {
   }
 
   cargarClima();
+
+  document.getElementById("refreshBtn").addEventListener("click", () => {
+  cargarDatos();
+});

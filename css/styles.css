@@ -31,6 +31,16 @@ h1 a{
   font-size: larger;
   font-weight: 700;
 }
+.dolar {
+  color: #001f54; /* Azul navy */
+  font-weight: bold;
+}
+
+.comparador {
+  color: #00c6ff; /* Cyan brillante */
+  font-weight: bold;
+}
+
 
 /* --- Contenedor principal --- */
 .container {
@@ -192,6 +202,36 @@ footer {
   margin-top: 2px;
 }
 
+#info-actualizacion {
+  text-align: center;
+  margin-top: 10px;
+}
+
+#refreshBtn {
+  margin-top: 6px;
+  padding: 4px 10px;
+  font-size: 0.85rem;
+  font-weight: 600;        /* un poco menos bold */
+  background: transparent;
+  border: 1px solid #999;
+  border-radius: 20px;
+  cursor: pointer;
+  color: #333;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: 0.2s;
+}
+
+#refreshBtn svg {
+  display: block;
+  stroke-width: 2.2;       /* ajustado al grosor menor */
+}
+
+#refreshBtn:hover {
+  border-color: #000;
+  color: #000;
+}
 
 
 /* --- Scroll horizontal en móvil --- */

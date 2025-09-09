@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   
   <!-- Title optimizado para SEO -->
-  <title>Dólar Hoy en Argentina | Oficial, Blue, MEP y Cripto</title>
+  <title>DólarComparador | Cotizaciones actualizadas</title>
 
   <link rel="canonical" href="https://dolarcomparador.com.ar/" />
 
@@ -14,13 +14,13 @@
   <meta name="description" content="Compará en tiempo real las cotizaciones del dólar oficial, blue, MEP y cripto en Argentina. Actualizado cada 10 minutos con las mejores fuentes." />
   
   <!-- Keywords relevantes -->
-  <meta name="keywords" content="dolar, dolar blue, dolar oficial, dolar mep, dolar cripto, cotizacion dolar Argentina, comparador dolar" />
+  <meta name="keywords" content="dolar, dolar blue, dolar oficial, dolar mep, dolar cripto, cotizacion dolar Argentina, comparar dolar, dolar comparar" />
   
   <meta name="author" content="Comparador de Dólar" />
   <meta name="google-site-verification" content="gTdNC5KeKlqdVCYUnaBBWW80JpZTF_KPJ-7-klinCkk" />
   
   <!-- Open Graph para redes sociales -->
-  <meta property="og:title" content="Cotización del Dólar Hoy en Argentina" />
+  <meta property="og:title" content="DólarComparador">
   <meta property="og:description" content="Oficial, Blue, MEP y Cripto en tiempo real. Compará los mejores valores del dólar en Argentina." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://dolarcomparador.com.ar" />
@@ -70,7 +70,13 @@
     <div id="climaInfo" class="position-absolute top-0 end-0 text-end text-muted small mt-2 me-2">
       Cargando clima...
     </div>
-    <h1><span aria-hidden="true"><a href="./index.html">🔁</span> Dólar Comparador</a></h1>
+    <h1>
+      <a href="./index.html">
+        🔁 <span class="dolar">Dólar</span><span class="comparador">Comparador</span>
+      </a>
+    </h1>
+
+
     <p>Compará cotizaciones del dólar en Argentina en tiempo real</p>
     <p>La forma mas rápida de encontrar la cotización para vender o comprar</p>
   </header>
@@ -113,6 +119,23 @@
     
     <div id="referencias-row"></div>
     <div id="hora-row"></div>
+    <div id="info-actualizacion">
+      <button id="refreshBtn" title="Actualizar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" 
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
+            viewBox="0 0 24 24">
+          <polyline points="23 4 23 10 17 10"></polyline>
+          <polyline points="1 20 1 14 7 14"></polyline>
+          <path d="M3.51 9a9 9 0 0 1 14.13-3.36L23 10M1 14l5.36 5.36A9 9 0 0 0 20.49 15"></path>
+        </svg>
+        Actualizar
+      </button>
+    </div>
+
+<script src="script.js"></script>
+<link rel="stylesheet" href="styles.css">
+
+
     <div id="referencia-dolarcripto">* basado en cotización de DAI en Buenbit</div>
     <noscript>
        <div class="alert alert-warning">
