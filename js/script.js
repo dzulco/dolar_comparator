@@ -5,7 +5,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function obtenerDolarApi(tipo) {
   try {
-    const res = await fetch(`https://dolarapi.com/v1/dolares/${tipo}`);
+    const res = await fetch(`https://dolarapi.com/v1/dolares/${tipo}`, {
+        method: 'GET',
+        cache: 'no-cache' 
+      });
     const data = await res.json();
     return { compra: data.compra.toFixed(2), venta: data.venta.toFixed(2) };
   } catch {
@@ -15,8 +18,14 @@ async function obtenerDolarApi(tipo) {
 
 async function obtenerDolarCriptoYa() {
   try {
-    const arsRes = await fetch("https://criptoya.com/api/buenbit/dai/ars");
-    const usdRes = await fetch("https://criptoya.com/api/buenbit/dai/usd");
+    const arsRes = await fetch("https://criptoya.com/api/buenbit/dai/ars", {
+        method: 'GET',
+        cache: 'no-cache' 
+      });
+    const usdRes = await fetch("https://criptoya.com/api/buenbit/dai/usd", {
+        method: 'GET',
+        cache: 'no-cache' 
+      });
     const ars = await arsRes.json();
     const usd = await usdRes.json();
     const compra = (ars.bid / usd.ask).toFixed(2);
@@ -30,7 +39,10 @@ async function obtenerDolarCriptoYa() {
 
 async function obtenerDolarBlueCriptoYa() {
   try {
-    const res = await fetch("https://criptoya.com/api/dolar");
+    const res = await fetch("https://criptoya.com/api/dolar", {
+        method: 'GET',
+        cache: 'no-cache' 
+      });
     const data = await res.json();
     return {
       compra: data.blue.bid.toFixed(2),
