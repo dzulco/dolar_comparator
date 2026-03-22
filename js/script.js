@@ -112,6 +112,14 @@ async function cargarCotizaciones() {
 
 
 function resaltarMejoresValores() {
+
+  // 🔥 LIMPIAR estados anteriores
+  document.querySelectorAll(".mejor-compra")
+    .forEach(td => td.classList.remove("mejor-compra"));
+
+  document.querySelectorAll(".mejor-venta")
+    .forEach(td => td.classList.remove("mejor-venta"));
+
   const compras = [...document.querySelectorAll("td[id$='compra']")];
   const ventas = [...document.querySelectorAll("td[id$='venta']")];
 
@@ -119,11 +127,15 @@ function resaltarMejoresValores() {
   let minVenta = Math.min(...ventas.map(td => parseFloat(td.textContent.substring(1)) || Infinity));
 
   compras.forEach(td => {
-    if (parseFloat(td.textContent.substring(1)) === maxCompra) td.classList.add("mejor-compra");
+    if (parseFloat(td.textContent.substring(1)) === maxCompra) {
+      td.classList.add("mejor-compra");
+    }
   });
 
   ventas.forEach(td => {
-    if (parseFloat(td.textContent.substring(1)) === minVenta) td.classList.add("mejor-venta");
+    if (parseFloat(td.textContent.substring(1)) === minVenta) {
+      td.classList.add("mejor-venta");
+    }
   });
 }
 
