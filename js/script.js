@@ -16,7 +16,7 @@ async function obtenerDolarApi(tipo) {
   }
 }
 
-async function obtenerDolarCriptoYa() {
+async function obtenerDolarCripto() {
   try {
     const arsRes = await fetch("https://criptoya.com/api/decrypto/dai/ars", {
         method: 'GET',
@@ -30,14 +30,14 @@ async function obtenerDolarCriptoYa() {
     const usd = await usdRes.json();
     const compra = (ars.bid / usd.ask).toFixed(2);
     const venta = (ars.ask / usd.bid).toFixed(2);
-    const variacion = usd.variation;
     return { compra, venta };
   } catch {
     return { compra: "N/D", venta: "N/D" };
   }
 }
 
-async function obtenerDolarBlueCriptoYa() {
+//Obtiene dolar blue + variaciones de resto de dolares
+async function obtenerDolarCriptoYa() {
   try {
     const res = await fetch("https://criptoya.com/api/dolar", {
         method: 'GET',
@@ -45,11 +45,11 @@ async function obtenerDolarBlueCriptoYa() {
       });
     const data = await res.json();
     return {
-      compra: data.blue.bid.toFixed(2),
-      venta: data.blue.ask.toFixed(2),
+      compraBlue: data.blue.bid.toFixed(2),
+      ventaBlue: data.blue.ask.toFixed(2),
       variacionBlue: data.blue.variation,
-      variacionMep: data.mep.al30.ci.variation,
-      variacionBuenBit: data.cripto.usdt.variation,
+      variacionMEP: data.mep.al30.ci.variation,
+      variacionUSDT: data.cripto.usdt.variation,
       variacionOficial: data.oficial.variation
     };
   } catch {
@@ -81,8 +81,8 @@ function formatearVariacionHTML(valor) {
 async function cargarCotizaciones() {
   const oficial = await obtenerDolarApi("oficial");
   const mep = await obtenerDolarApi("bolsa");
-  const buenbit = await obtenerDolarCriptoYa();
-  const blue = await obtenerDolarBlueCriptoYa();
+  const cripto = await obtenerDolarCripto();
+  const dolarCriptoYa = await obtenerDolarCriptoYa(); 
 
   // Calcular precios MEP con comisión
   const mepCompraComision = (parseFloat(mep.compra) * (1 - COMISION_MEP)).toFixed(2);
@@ -91,22 +91,22 @@ async function cargarCotizaciones() {
   document.getElementById("oficial-compra").innerHTML =
     `<div class="celda-precio">$${oficial.compra}<div class="variacion">&nbsp;</div></div>`;
   document.getElementById("oficial-venta").innerHTML =
-    `<div class="celda-precio">$${oficial.venta}${formatearVariacionHTML(blue.variacionOficial)}</div>`;
+    `<div class="celda-precio">$${oficial.venta}${formatearVariacionHTML(dolarCriptoYa.variacionOficial)}</div>`;
 
   document.getElementById("mep-compra").innerHTML =
     `<div class="celda-precio">$${mepCompraComision}<div class="variacion"></div></div>`;
   document.getElementById("mep-venta").innerHTML =
-    `<div class="celda-precio">$${mepVentaComision}${formatearVariacionHTML(blue.variacionMep)}</div>`;
+    `<div class="celda-precio">$${mepVentaComision}${formatearVariacionHTML(dolarCriptoYa.variacionMEP)}</div>`;
 
   document.getElementById("buenbit-compra").innerHTML =
-    `<div class="celda-precio">$${buenbit.compra}<div class="variacion">&nbsp;</div></div>`;
+    `<div class="celda-precio">$${cripto.compra}<div class="variacion">&nbsp;</div></div>`;
   document.getElementById("buenbit-venta").innerHTML =
-    `<div class="celda-precio">$${buenbit.venta}${formatearVariacionHTML(blue.variacionBuenBit)}</div>`;
+    `<div class="celda-precio">$${cripto.venta}${formatearVariacionHTML(dolarCriptoYa.variacionUSDT)}</div>`;
 
   document.getElementById("blue-compra").innerHTML =
-    `<div class="celda-precio">$${blue.compra}<div class="variacion">&nbsp;</div></div>`;
+    `<div class="celda-precio">$${dolarCriptoYa.compraBlue}<div class="variacion">&nbsp;</div></div>`;
   document.getElementById("blue-venta").innerHTML =
-    `<div class="celda-precio">$${blue.venta}${formatearVariacionHTML(blue.variacionBlue)}</div>`;
+    `<div class="celda-precio">$${dolarCriptoYa.ventaBlue}${formatearVariacionHTML(dolarCriptoYa.variacionBlue)}</div>`;
 }
 
 
