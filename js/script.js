@@ -18,11 +18,11 @@ async function obtenerDolarApi(tipo) {
 
 async function obtenerDolarCriptoYa() {
   try {
-    const arsRes = await fetch("https://criptoya.com/api/buenbit/dai/ars", {
+    const arsRes = await fetch("https://criptoya.com/api/decrypto/dai/ars", {
         method: 'GET',
         cache: 'no-cache' 
       });
-    const usdRes = await fetch("https://criptoya.com/api/buenbit/dai/usd", {
+    const usdRes = await fetch("https://criptoya.com/api/decrypto/dai/usd", {
         method: 'GET',
         cache: 'no-cache' 
       });
