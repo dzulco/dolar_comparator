@@ -163,41 +163,44 @@ function mostrarHoraActualizacion() {
 }
 
 async function cargarCarruselNoticias() {
-  try {
-    const res = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.clarin.com/rss/economia');
-    const data = await res.json();
+    try {
+        // Usamos corsproxy.io para saltar la restricción de CORS de forma transparente
+        const rssTarget = 'https://www.clarin.com/rss/economia';
+        const apiRss = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssTarget)}`;
+        const res = await fetch(`https://corsproxy.io/?${encodeURIComponent(apiRss)}`);
+        
+        const data = await res.json();
+        const contenedor = document.getElementById("noticiasCarousel");
+        
+        if (!data.items || !Array.isArray(data.items)) return;
+        
+        contenedor.innerHTML = ''; // Limpiar contenido previo
+        
+        data.items.slice(0, 5).forEach((noticia, i) => {
+            const imagen = noticia.enclosure?.link || 'https://placehold.co/800x400?text=-';
+            const item = document.createElement("div");
+            item.className = "carousel-item" + (i === 0 ? " active" : "");
+            item.innerHTML = `
+                <img src="${imagen}" class="carrusel-img" alt="Imagen de la noticia">
+                <div class="carousel-caption bg-dark bg-opacity-75 rounded-bottom p-3">
+                    <a href="${noticia.link}" target="_blank" class="h6 d-block text-white text-decoration-none mb-1" rel="noopener noreferrer">
+                        🗞️ ${noticia.title}
+                    </a>
+                    <small class="text-light">${new Date(noticia.pubDate).toLocaleDateString()}</small>
+                </div>
+            `;
+            contenedor.appendChild(item);
+        });
 
-    const contenedor = document.getElementById("noticiasCarousel");
-    if (!data.items || !Array.isArray(data.items)) return;
+        const carruselElement = document.querySelector('#carruselNoticias');
+        bootstrap.Carousel.getInstance(carruselElement) || new bootstrap.Carousel(carruselElement, {
+            interval: 4000,
+            ride: 'carousel'
+        });
 
-    contenedor.innerHTML = ''; // Limpiar contenido previo
-
-    data.items.slice(0, 5).forEach((noticia, i) => {
-      const imagen = noticia.enclosure?.link || 'https://placehold.co/800x400?text=-';
-
-      const item = document.createElement("div");
-      item.className = "carousel-item" + (i === 0 ? " active" : "");
-      item.innerHTML = `
-        <img src="${imagen}" class="carrusel-img" alt="Imagen de la noticia">
-        <div class="carousel-caption bg-dark bg-opacity-75 rounded-bottom p-3">
-          <a href="${noticia.link}" target="_blank" class="h6 d-block text-white text-decoration-none mb-1" rel="noopener noreferrer">
-            🗞️ ${noticia.title}
-          </a>
-          <small class="text-light">${new Date(noticia.pubDate).toLocaleDateString()}</small>
-        </div>
-      `;
-      contenedor.appendChild(item);
-    });
-
-    const carruselElement = document.querySelector('#carruselNoticias');
-    bootstrap.Carousel.getInstance(carruselElement) || new bootstrap.Carousel(carruselElement, {
-      interval: 4000,
-      ride: 'carousel'
-    });
-
-  } catch (error) {
-    console.error("Error al cargar noticias:", error);
-  }
+    } catch (error) {
+        console.error("Error al cargar noticias:", error);
+    }
 }
 
 
