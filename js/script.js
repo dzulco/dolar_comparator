@@ -223,7 +223,7 @@ async function cargarCarruselNoticias() {
           <a href="${noticia.link}" target="_blank" class="h6 d-block text-white text-decoration-none mb-1" rel="noopener noreferrer">
             🗞️ ${noticia.title}
           </a>
-          <small class="text-light">${new Date(noticia.pubDate).toLocaleDateString()}</small>
+          <small class="text-light">${noticia.pubDate}</small>
         </div>
       `;
 
