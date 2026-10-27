@@ -15,6 +15,9 @@
   "author": "",
   "license": "ISC",
   "type": "commonjs",
+  "engines": {
+    "node": ">=22.23.4"
+  },
   "bugs": {
     "url": "https://github.com/dzulco/dolar_comparator/issues"
   },
