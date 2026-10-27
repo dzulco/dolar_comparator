@@ -24,8 +24,9 @@ async function cargarNoticias() {
       item.rel = "noopener noreferrer";
       item.className = "list-group-item list-group-item-action flex-column align-items-start";
 
-      const fecha = new Date(noticia.pubDate);
-      const fechaFormateada = isNaN(fecha) ? "" : fecha.toLocaleDateString();
+      const fechaFormateada = noticia.pubDate
+                              ? noticia.pubDate
+                              : "";
 
       const descripcion = noticia.description
         ? noticia.description.replace(/<\/?[^>]+(>|$)/g, "").substring(0, 150)
