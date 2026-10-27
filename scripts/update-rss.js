@@ -14,6 +14,7 @@ async function main() {
         title: noticia.title || "",
         link: noticia.link || "",
         pubDate: noticia.pubDate || "",
+        description: noticia.description || "",
         image:
           noticia.enclosure?.url ||
           noticia.enclosure?.link ||
