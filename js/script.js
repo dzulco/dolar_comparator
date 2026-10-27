@@ -161,7 +161,7 @@ function mostrarHoraActualizacion() {
   const hora = ahora.toLocaleTimeString('es-AR', { hour12: false });
   document.getElementById('hora-row').textContent = `⏱ Última actualización: ${hora}`;
 }
-
+/* VERSION DEPRECADA POR CORS DEL FEED RSS
 async function cargarCarruselNoticias() {
   try {
     const res = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.clarin.com/rss/economia');
@@ -199,7 +199,48 @@ async function cargarCarruselNoticias() {
     console.error("Error al cargar noticias:", error);
   }
 }
+*/
+async function cargarCarruselNoticias() {
+  try {
+    const res = await fetch("./data/noticias.json");
+    if (!res.ok) throw new Error("No se pudo cargar noticias.json");
 
+    const data = await res.json();
+    const items = Array.isArray(data.items) ? data.items : [];
+
+    const contenedor = document.getElementById("noticiasCarousel");
+    if (!contenedor) return;
+
+    contenedor.innerHTML = "";
+
+    items.forEach((noticia, i) => {
+      const item = document.createElement("div");
+      item.className = "carousel-item" + (i === 0 ? " active" : "");
+
+      item.innerHTML = `
+        <img src="${noticia.image}" class="carrusel-img" alt="Imagen de la noticia">
+        <div class="carousel-caption bg-dark bg-opacity-75 rounded-bottom p-3">
+          <a href="${noticia.link}" target="_blank" class="h6 d-block text-white text-decoration-none mb-1" rel="noopener noreferrer">
+            🗞️ ${noticia.title}
+          </a>
+          <small class="text-light">${new Date(noticia.pubDate).toLocaleDateString()}</small>
+        </div>
+      `;
+
+      contenedor.appendChild(item);
+    });
+
+    const carruselElement = document.querySelector("#carruselNoticias");
+    if (carruselElement) {
+      bootstrap.Carousel.getInstance(carruselElement) || new bootstrap.Carousel(carruselElement, {
+        interval: 4000,
+        ride: "carousel"
+      });
+    }
+  } catch (error) {
+    console.error("Error al cargar noticias:", error);
+  }
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   cargarCarruselNoticias();

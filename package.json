@@ -1,0 +1,27 @@
+{
+  "name": "dolar_comparator",
+  "version": "1.0.0",
+  "description": "Sitio web para comparar en tiempo real las cotizaciones del dólar en Argentina.",
+  "main": "index.js",
+  "scripts": {
+    "update:rss": "node scripts/update-rss.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dzulco/dolar_comparator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/dzulco/dolar_comparator/issues"
+  },
+  "homepage": "https://github.com/dzulco/dolar_comparator#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.3.0",
+    "rss-parser": "^3.13.0"
+  }
+}
